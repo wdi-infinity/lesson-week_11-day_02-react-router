@@ -50,29 +50,30 @@ What are the 3 ways to render a component with props within a `<Route>`?
 
 What is `<Link>`? What is `<NavLink>`?
 
-### Getting Started using React Router
+### Lab: Getting Started using React Router
 
-Beyond installing a new library from npm:
+Beyond installing the React Router library from npm:
 `npm install react-router-dom`
 
-### Lab
+What else do we have to do to get started with routes in our application?
 
-Incorporate react-router into an existing React application. Make sure to have a global Nav bar with links to various "pages".
+Incorporate React Router into an existing React application, such as a OMDB movie client. Make sure to have a global Nav bar with links to various "pages".
 
 ### Advanced Challenge! 
 
-Read through the code and comments in this advanced example of [creating a modal gallery in React](https://reacttraining.com/react-router/web/example/modal-gallery) that brings together many different features of React Router. See if you can get it working, then change various parts to make it your own!
+Read through the code and comments in this example of [creating a modal gallery in React](https://reacttraining.com/react-router/web/example/modal-gallery) that brings together many different features of React Router. See if you can get it working, then change various parts to make it your own!
 
 **tips**: 
 
 - Usually when you write a complex feature, you should start small. Get small pieces of functionality working, then incorporate more and more of the working code until you get to the the completed solution
-	- However, when starting with a completed feature, you may need to start with the completed working version. So in this case, starting small means starting with the working version, and making small changes or customizations. 
+	- However, when starting with a completed feature, you may need to start with the completed working version. 
+	- So in this case, starting small means starting with the working version, and making small changes or customizations. 
 - When something breaks and you cannot figure it out, work backwards from a functioning version.
-- When you encounter something you do not know, and that is not commented sufficiently to understand, take a short detour and research the feature. Then, return to the codebase and add your own comments and notes.
+- When you encounter something you do not know, and that is not commented sufficiently, take a short detour and research the function / techniques used. Then, return to the codebase and add your own comments and notes.
  
 ### More Advanced Challenge!
 
-Make your image modal work with Axios, performing a `GET` request to retreive a list of images.
+Customize the image modal further. Make your image modal work with a dynamic list of images, such as a list of puppies from [the dog.ceo api](https://git.generalassemb.ly/ga-wdi-pvd/imdb-react-client/blob/93b8909ba852fe409234a90cf6ae1aa3ed947a78/src/Puppies.js) using Axios, performing a `GET` request to retreive a list of images.
 
 ## Additional Resources
 - [Routing React Apps - The Complete Guide](https://scotch.io/tutorials/routing-react-apps-the-complete-guide)
