@@ -10,7 +10,11 @@
 
 By the end of this, developers should be able to:
 
--
+- Understand front-end routing
+- Understand the React Router model
+- Create front-end routes
+- Create routes with dynamic segments
+- Create nested routes
 
 ## Preparation
 
