@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+
 import './App.scss'
 
 import Movie from './Movie.js'
+import Nav from './Nav'
 
 const movies = [
   {
@@ -62,15 +65,21 @@ const movies = [
 
 const App = () => (
   <div>
-    <h1>MyMDB</h1>
-    {movies.map(movie => (
-      <Movie
-        key={movie.title}
-        title={movie.title}
-        director={movie.director}
-        cast={movie.cast}
-      />
-    ))}
+    <Route path='/' component={Nav} />
+    <Route exact path='/' render={() => (<h4>Welcome! Click a link.</h4>)} />
+    <Route path='/movies' render={() => (
+      <div>
+        {movies.map(movie => (
+          <Movie
+            key={movie.title}
+            title={movie.title}
+            director={movie.director}
+            cast={movie.cast}
+          />
+        ))}
+      </div>
+    )}
+    />
   </div>
 )
 
