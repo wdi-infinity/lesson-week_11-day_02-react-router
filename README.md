@@ -1,82 +1,117 @@
 [![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
- 
+# Talk Template
+
 ## Prerequisites
-- [react-components-and-props](https://git.generalassemb.ly/ga-wdi-pvd/react-components-and-props)
-- [react-component-lifecycle](https://git.generalassemb.ly/ga-wdi-pvd/react-component-lifecycle)
 
-## Learning Objectives
-- Research the philosophy behind react-router
-- Implement dynamic routing in a React interface
-- Modify an existing React application to use react-router
+-   [react-components-and-props](https://git.generalassemb.ly/ga-wdi-boston/react-components-and-props)
 
-### Front-end routing
+## Objectives
 
-Why a router on the front-end? Shouldn't this go on the back end?
+By the end of this, developers should be able to:
 
-Before the advent of the SPA, the job of serving pages was left to the server side of the equation (think Rails views). You would make a request and the server would handle populating and delivering a view to the client. 
+-   Write objectives that focus on demonstrating knowledge.
+-   Write learning objectives that begin with an [imperative
+    verb](https://en.wikipedia.org/wiki/Imperative_mood).
+-   Avoid objectives that start with "Use" or "Understand".
+-   Rewrite objecives that begin with "Use" by inverting sentence structure.
+-   End each objective with a period.
+-   Write objectives on the whiteboard so they can be referenced during a talk.
 
-Fast forward a number of years where browsers are more advanced, the internet is faster and users expect quick results. This round-trip to the server is costly and slow. Instead, we can load everything that the client needs ahead of time, and when new information is needed on the server, an asynchronous request can be made to the server for any new information.
+## Preparation
 
-But, users still expect that warm and fuzzy interface that we have grown to love, the URL address bar. We also want browser history, so we can go forward and backwards through our various requests. So beyond just clicking links to navigate a SPA, we want the URL to be updated, and the history should also be updated appropriately.
+1.  Fork and clone this repository.
+ [FAQ](https://github.com/ga-wdi-boston/meta/wiki/ForkAndClone)
+1.  Create a new branch, `training`, for your work.
+1.  Checkout to the `training` branch.
+1.  Install dependencies with `npm install`.
 
-A front end router lets us handle navigation of a user interface and state changes more efficiently. Instead of having to rerender and entire page we can only chose to change what we need. We can also serve more information faster so instead of having to send entire pages from the server to the client we can send smaller bits of data (like JSON) and let the client side handle the job of rendering.
+## State in React Components
 
-### Routing in React
+At this point, we know that we can pass data into a React component by providing
+props. This allows data to flow "downwards", from parent component to child
+component. Where does this data originate from, though? What if we need to
+frequently update that data?
 
-So you have a single page application. And you want users to be able to use links and URLs to navigate your application. And you're working with React. How do you do this? Sure, you could roll your own solution, complete with a functioning browser history using HTML5 and push-state, but that would be reinventing the wheel. 
+So far, that data has just been an array or object in the global scope of
+`App.js`. This is not ideal for dynamic data -- if the data changes, every
+component needs to know that, so that it can decide whether it needs to
+re-render anything that's changed. To achieve this, React components keep track
+of data in an object called "state".
 
-Luckily, there is an excellent library that handles all aspects of routing for React applications, called (you gussed it!) [react-router](https://reacttraining.com/react-router/)
+## State vs. Props
 
-## React Router
+`state` and `props` have a lot in common:
 
-To get familiar with React-router, we are going to use their excellent guides.
+-  Both are POJOs.
+-  Changes to a component's props or state cause the component's `render`
+   method to be called.
+-  Neither should be modified directly. (e.g. no `this.props.foo = 'bar'`)
+-  Both are optional. A React component doesn't need props or state to render
+   markup to the DOM (it wouldn't be very useful with neither, though).
 
-Read [this article on the history and philosophy of react-router](https://reacttraining.com/react-router/web/guides/philosophy)
+They are also different in a few key ways:
 
-How is react-router different from other frameworks' use of routes? 
+-  Props are passed into a component from its parent. State is determined
+   _within_ a component.
+-  Props are initalized by adding attributes in JSX, e.g. `<MyComponent coolProp="radical!" />`. State is declared in a component's `constructor` method.
+-  Props can only be modified in the parent component. State is modified in
+   the component itself, with a call to `this.setState`.
 
-What is static routing? What is dynamic routing?
 
-### Basic Components
+## Demo: A simple stateful component
 
-Next, continue reading through the guides, and go through [Basic Components](https://reacttraining.com/react-router/web/guides/basic-components)
+Let's take a look at a very simple example of a React component that keeps
+track of its own state. You can follow along and add comments in
+ `src/StateDemo.js`.
 
-What are the three types of components in React Router?
+To render this component, instead of the contents of `App.js`, I'll just switch
+out the `import` in `src/index.js`. Don't worry too much about this, it's just
+a way to have multiple React apps in one repo for demonstration purposes.
 
-What is a `<Route>` component? When would you use a `<Switch>` component?
+I'll walk you through what's happening line by line, and show you the result
+in the browser. Then, let's see if we can avoid having to use `.bind` on all
+our component methods.
 
-What are the 3 ways to render a component with props within a `<Route>`? 
+## Code-Along: Add option to "Like" a movie
 
-What is `<Link>`? What is `<NavLink>`?
+Now that we know how to update state in a component, let's modify our `Movie`
+component to allow us to "like" a movie and keep track of our opinions.
 
-### Lab: Getting Started using React Router
+To add this functionality, we'll need to do the following:
 
-Beyond installing the React Router library from npm:
-`npm install react-router-dom`
+1. give our `Movie` component a constructor, so that we can initialize a `state`
+   object. The component should store just one property in its state: a boolean
+   called `liked`.
+1. Create a function that toggles that `liked` property on the state object.
+1. Render a "like" button.
+1. Give some visual indication when a `Movie` is liked.
 
-What else do we have to do to get started with routes in our application?
+There are a few things we'll need to keep in mind:
 
-Incorporate React Router into an existing React application, such as a OMDB movie client. Make sure to have a global Nav bar with links to various "pages".
+- `this.setState` is asynchronous, so any `this.setState` calls where the new
+  state depends on the old state need to use [a slightly different syntax](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous).
+- Event listeners in React are attached with the syntax
+  `onChange={this.funcName}`. Note that this is different from the `onchange`
+  attribute built into HTML.
+- Similarly, classes are added to elements in React with the syntax `className="foo"`, **NOT** the familiar `class="foo"`.
 
-### Advanced Challenge! 
+## Lab: Toggle Actors Display
 
-Read through the code and comments in this example of [creating a modal gallery in React](https://reacttraining.com/react-router/web/example/modal-gallery) that brings together many different features of React Router. See if you can get it working, then change various parts to make it your own!
+For some practice with state, add another method to our `Movie` component that
+toggles a `hideActors` boolean on the state object. Only display information
+about actors when the `hideActors` boolean is true.
 
-**tips**: 
-
-- Usually when you write a complex feature, you should start small. Get small pieces of functionality working, then incorporate more and more of the working code until you get to the the completed solution
-	- However, when starting with a completed feature, you may need to start with the completed working version. 
-	- So in this case, starting small means starting with the working version, and making small changes or customizations. 
-- When something breaks and you cannot figure it out, work backwards from a functioning version.
-- When you encounter something you do not know, and that is not commented sufficiently, take a short detour and research the function / techniques used. Then, return to the codebase and add your own comments and notes.
- 
-### More Advanced Challenge!
-
-Customize the image modal further. Make your image modal work with a dynamic list of images, such as a list of puppies from [the dog.ceo api](https://git.generalassemb.ly/ga-wdi-pvd/imdb-react-client/blob/93b8909ba852fe409234a90cf6ae1aa3ed947a78/src/Puppies.js) using Axios, performing a `GET` request to retreive a list of images.
+**HINT:** You can use ternaries or `if` statements in JSX to display different
+markup depending on whether a variable or expression is truthy.
 
 ## Additional Resources
-- [Routing React Apps - The Complete Guide](https://scotch.io/tutorials/routing-react-apps-the-complete-guide)
-	- A LOT here. It starts with configuring the development environment, and touches on many aspects of a real application's routing needs. 
 
-- [React Router Docs and Guides](https://reacttraining.com/react-router/)
+-   [React Docs - State and Lifecycle](https://reactjs.org/docs/state-and-lifecycle.html)
+-   [CSS Tricks - React State From the Ground Up](https://css-tricks.com/react-state-from-the-ground-up/)
+
+## [License](LICENSE)
+
+1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
+1.  All software code is licensed under GNU GPLv3. For commercial use or
+    alternative licensing, please contact legal@ga.co.
