@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Route } from 'react-router-dom'
-
-import './App.scss'
 
 import Movie from './Movie.js'
 import Nav from './Nav'
