@@ -6,6 +6,7 @@ import Nav from './Nav'
 
 const movies = [
   {
+    id: 1,
     title: 'Dr. Strangelove',
     director: 'Stanley Kubrick',
     cast: [
@@ -24,6 +25,7 @@ const movies = [
     ]
   },
   {
+    id: 2,
     title: 'Eraserhead',
     director: 'David Lynch',
     cast: [
@@ -42,6 +44,7 @@ const movies = [
     ]
   },
   {
+    id: 3,
     title: 'Fantastic Mr. Fox',
     director: 'Wes Anderson',
     cast: [
