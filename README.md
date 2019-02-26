@@ -131,6 +131,18 @@ respectively.
 Once you've had a chance to attempt this, I'll demonstrate and discuss the
 solution.
 
+## Discussion - State Persistence
+
+Have you noticed that if you like a movie, then travel to the Home route and
+back to the Movies route, your movie is no longer liked?
+
+Why do you think that is?
+
+How could we solve this problem?
+
+What would be different about this problem if we were receiving our data from
+an API?
+
 ## React Router Tips
 
 Here are some things to keep in mind when working with React Router:
