@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import './Movie.scss'
-
 import Actor from './Actor'
 
 class Movie extends Component {
